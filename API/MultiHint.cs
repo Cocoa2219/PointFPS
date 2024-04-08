@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using Exiled.API.Features;
 using MEC;
-using Respawning;
 
-namespace TestFPS;
+namespace PointFPS.API;
 
 public class MultiHint
 {

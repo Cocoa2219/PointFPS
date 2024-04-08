@@ -1,18 +1,20 @@
 ﻿using System;
 using Exiled.API.Features;
+using PointFPS;
+using EventHandler = System.EventHandler;
 using Map = Exiled.Events.Handlers.Map;
 using Player = Exiled.Events.Handlers.Player;
 using Server = Exiled.Events.Handlers.Server;
 
-namespace TestFPS
+namespace PointFPS
 {
-    public class TestFPS : Plugin<Config>
+    public class PointFPS : Plugin<Config>
     {
-        public static TestFPS Instance { get; private set; }
+        public static PointFPS Instance { get; private set; }
 
-        public override string Name => "TestFPS";
+        public override string Name => "PointFPS";
         public override string Author => "Cocoa";
-        public override string Prefix => "TestFPS";
+        public override string Prefix => "PointFPS";
         public override Version Version => new(1, 0, 0);
 
         public EventHandler _eventHandler;
@@ -21,7 +23,7 @@ namespace TestFPS
         {
             Instance = this;
 
-            _eventHandler = new EventHandler();
+            _eventHandler = new EventHandler(this);
             RegisterEvents();
         }
 

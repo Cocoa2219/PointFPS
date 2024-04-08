@@ -8,8 +8,8 @@
         <ProjectGuid>{E41B8BC5-DEC5-4E1D-A609-BE9AEFF3E2C0}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>TestFPS</RootNamespace>
-        <AssemblyName>TestFPS</AssemblyName>
+        <RootNamespace>PointFPS</RootNamespace>
+        <AssemblyName>PointFPS</AssemblyName>
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <LangVersion>latest</LangVersion>
@@ -23,7 +23,7 @@
         <DefineConstants>DEBUG;TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
-        <PostBuildEvent>xcopy /y /s /i /d "C:\Users\PC\Documents\TestFPS\bin\Debug\TestFPS.dll" "C:\Users\PC\AppData\Roaming\EXILED\Plugins"</PostBuildEvent>
+        <PostBuildEvent>xcopy /y /s /i /d "C:\Users\PC\Documents\PointFPS\bin\Debug\PointFPS.dll" "C:\Users\PC\AppData\Roaming\EXILED\Plugins"</PostBuildEvent>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,7 +33,7 @@
         <DefineConstants>TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
-        <PostBuildEvent>xcopy /y /s /i /d "C:\Users\PC\Documents\TestFPS\bin\Release\TestFPS.dll" "C:\Users\PC\AppData\Roaming\EXILED\Plugins"</PostBuildEvent>
+        <PostBuildEvent>xcopy /y /s /i /d "C:\Users\PC\Documents\PointFPS\bin\Release\PointFPS.dll" "C:\Users\PC\AppData\Roaming\EXILED\Plugins"</PostBuildEvent>
     </PropertyGroup>
     <ItemGroup>
         <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -429,16 +429,15 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Commands\FixCamera.cs" />
-        <Compile Include="Commands\PinPoint.cs" />
-        <Compile Include="Commands\ShowHint.cs" />
+        <Compile Include="API\MultiHint.cs" />
+        <Compile Include="API\Pin.cs" />
+        <Compile Include="API\PingSettings.cs" />
+        <Compile Include="API\ScoreType.cs" />
+        <Compile Include="API\WeaponType.cs" />
         <Compile Include="Config.cs" />
         <Compile Include="EventHandler.cs" />
-        <Compile Include="MultiHint.cs" />
-        <Compile Include="Pin.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
-        <Compile Include="TestFPS.cs" />
-        <Compile Include="WeaponType.cs" />
+        <Compile Include="PointFPS.cs" />
     </ItemGroup>
     <ItemGroup>
       <None Include="packages.config" />

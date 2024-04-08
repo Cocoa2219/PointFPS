@@ -12,15 +12,16 @@ using Exiled.Events.EventArgs.Server;
 using MEC;
 using PlayerRoles;
 using PlayerStatsSystem;
+using PointFPS.API;
 using UnityEngine;
 using Utils.NonAllocLINQ;
 using Exception = System.Exception;
 using FirearmDamageHandler = PlayerStatsSystem.FirearmDamageHandler;
 using Random = UnityEngine.Random;
 
-namespace TestFPS;
+namespace PointFPS;
 
-public class EventHandler
+public class EventHandler(PointFPS plugin)
 {
     public readonly Dictionary<Player, HashSet<Player>> pinPointedPlayers = new();
     private readonly Dictionary<Player, HashSet<Vector3>> pinPointedPositions = new();
@@ -83,6 +84,7 @@ public class EventHandler
 
     private List<CoroutineHandle> _coroutines = new();
 
+    private PointFPS Plugin { get; } = plugin;
 
     private int _timer;
 
@@ -1031,7 +1033,7 @@ public class EventHandler
         if (pinPointedPositions.TryGetValue(player, out var position))
             pingCount += position.Count;
 
-        if (pingCount >= TestFPS.Instance.Config.PingLimit)
+        if (pingCount >= PointFPS.Instance.Config.PingSettings.PingLimit)
         {
             Log.Debug($"{player.Nickname} reached the ping limit.");
             yield break;
@@ -1085,7 +1087,7 @@ public class EventHandler
 
                             _coroutines.Add(Timing.RunCoroutine(PingCooldown(player)));
 
-                            yield return Timing.WaitForSeconds(TestFPS.Instance.Config.PingDuration);
+                            yield return Timing.WaitForSeconds(PointFPS.Instance.Config.PingSettings.PingDuration);
 
                             foreach (var p in _teamA)
                             {
@@ -1117,7 +1119,7 @@ public class EventHandler
 
                             _coroutines.Add(Timing.RunCoroutine(PingCooldown(player)));
 
-                            yield return Timing.WaitForSeconds(TestFPS.Instance.Config.PingDuration);
+                            yield return Timing.WaitForSeconds(PointFPS.Instance.Config.PingSettings.PingDuration);
 
                             foreach (var p in _teamB)
                             {
@@ -1166,7 +1168,7 @@ public class EventHandler
 
                         _coroutines.Add(Timing.RunCoroutine(PingCooldown(player)));
 
-                        yield return Timing.WaitForSeconds(TestFPS.Instance.Config.PingDuration);
+                        yield return Timing.WaitForSeconds(PointFPS.Instance.Config.PingSettings.PingDuration);
 
                         foreach (var p in _teamA)
                         {
@@ -1209,7 +1211,7 @@ public class EventHandler
 
                         _coroutines.Add(Timing.RunCoroutine(PingCooldown(player)));
 
-                        yield return Timing.WaitForSeconds(TestFPS.Instance.Config.PingDuration);
+                        yield return Timing.WaitForSeconds(PointFPS.Instance.Config.PingSettings.PingDuration);
 
                         foreach (var p in _teamB)
                         {
@@ -1265,7 +1267,7 @@ public class EventHandler
 
                     _coroutines.Add(Timing.RunCoroutine(PingCooldown(player)));
 
-                    yield return Timing.WaitForSeconds(TestFPS.Instance.Config.PingDuration);
+                    yield return Timing.WaitForSeconds(PointFPS.Instance.Config.PingSettings.PingDuration);
 
                     foreach (var p in _teamA)
                     {
@@ -1298,7 +1300,7 @@ public class EventHandler
 
                     _coroutines.Add(Timing.RunCoroutine(PingCooldown(player)));
 
-                    yield return Timing.WaitForSeconds(TestFPS.Instance.Config.PingDuration);
+                    yield return Timing.WaitForSeconds(PointFPS.Instance.Config.PingSettings.PingDuration);
 
                     foreach (var p in _teamB)
                     {
@@ -1312,7 +1314,7 @@ public class EventHandler
     private IEnumerator<float> PingCooldown(Player player)
     {
         pingCooldown.Add(player);
-        yield return Timing.WaitForSeconds(TestFPS.Instance.Config.PingCooldown);
+        yield return Timing.WaitForSeconds(PointFPS.Instance.Config.PingSettings.PingCooldown);
         pingCooldown.Remove(player);
     }
 

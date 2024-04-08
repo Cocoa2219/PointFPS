@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestFPS", "TestFPS.csproj", "{E41B8BC5-DEC5-4E1D-A609-BE9AEFF3E2C0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PointFPS", "PointFPS.csproj", "{E41B8BC5-DEC5-4E1D-A609-BE9AEFF3E2C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

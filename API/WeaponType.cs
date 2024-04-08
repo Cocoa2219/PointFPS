@@ -1,4 +1,4 @@
-﻿namespace TestFPS;
+﻿namespace PointFPS.API;
 
 public enum WeaponType
 {
