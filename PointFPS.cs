@@ -21,6 +21,7 @@ namespace PointFPS
 
         public override void OnEnabled()
         {
+            base.OnEnabled();
             Instance = this;
 
             _eventHandler = new EventHandler(this);
@@ -49,6 +50,7 @@ namespace PointFPS
 
         public override void OnDisabled()
         {
+            base.OnDisabled();
             UnregisterEvents();
 
             _eventHandler = null;

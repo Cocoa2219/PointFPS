@@ -8,6 +8,5 @@ namespace PointFPS
         public bool IsEnabled { get; set; } = true;
         public bool Debug { get; set; } = false;
         public PingSettings PingSettings { get; set; } = new PingSettings();
-
     }
 }

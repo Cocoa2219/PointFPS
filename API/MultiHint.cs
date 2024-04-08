@@ -16,17 +16,29 @@ public class MultiHint
         if (!playerHint.ContainsKey(playerId))
             playerHint.Add(playerId, []);
 
+        writtenText += "<size=25>";
         writtenText += text;
+        writtenText += "</size>";
         writtenText += "\n";
 
         if (playerHint[playerId].Count > 0)
             for (var i = playerHint[playerId].Count - 1; i >= 0; i--)
             {
+                writtenText += "<size=25>";
                 writtenText += playerHint[playerId][i];
+                writtenText += "</size>";
                 writtenText += "\n";
             }
 
-        writtenText += "<size=300>\n\n";
+        var lineCount = 25;
+
+        lineCount -= 2;
+        lineCount -= playerHint[playerId].Count;
+
+        for (var i = 0; i < lineCount; i++)
+        {
+            writtenText += "<size=25>\n</size>";
+        }
 
         playerHint[playerId].Add(text);
         player.ShowHint(writtenText, 120);
@@ -42,11 +54,21 @@ public class MultiHint
         if (playerHint[player.UserId].Count > 0)
             for (var i = playerHint[player.UserId].Count - 1; i >= 0; i--)
             {
+                text += "<size=25>";
                 text += playerHint[player.UserId][i];
+                text += "</size>";
                 text += "\n";
             }
 
-        text += "<size=350>\n\n";
+        var lineCount = 25;
+
+        lineCount -= 1;
+        lineCount -= playerHint[player.UserId].Count;
+
+        for (var i = 0; i < lineCount; i++)
+        {
+            text += "<size=25>\n</size>";
+        }
 
         player.ShowHint(text, 120);
     }

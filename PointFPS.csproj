@@ -23,7 +23,7 @@
         <DefineConstants>DEBUG;TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
-        <PostBuildEvent>xcopy /y /s /i /d "C:\Users\PC\Documents\PointFPS\bin\Debug\PointFPS.dll" "C:\Users\PC\AppData\Roaming\EXILED\Plugins"</PostBuildEvent>
+        <PostBuildEvent>xcopy /y /s /i /d "C:\Users\user\Documents\PointFPS\bin\Debug\PointFPS.dll" "C:\Users\user\AppData\Roaming\EXILED\Plugins"</PostBuildEvent>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,7 +33,7 @@
         <DefineConstants>TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
-        <PostBuildEvent>xcopy /y /s /i /d "C:\Users\PC\Documents\PointFPS\bin\Release\PointFPS.dll" "C:\Users\PC\AppData\Roaming\EXILED\Plugins"</PostBuildEvent>
+        <PostBuildEvent>xcopy /y /s /i /d "C:\Users\user\Documents\PointFPS\bin\Release\PointFPS.dll" "C:\Users\user\AppData\Roaming\EXILED\Plugins"</PostBuildEvent>
     </PropertyGroup>
     <ItemGroup>
         <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -434,6 +434,7 @@
         <Compile Include="API\PingSettings.cs" />
         <Compile Include="API\ScoreType.cs" />
         <Compile Include="API\WeaponType.cs" />
+        <Compile Include="Commands\SetZone.cs" />
         <Compile Include="Config.cs" />
         <Compile Include="EventHandler.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
