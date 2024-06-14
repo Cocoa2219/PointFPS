@@ -5,6 +5,7 @@ using Exiled.API.Enums;
 
 namespace PointFPS.Commands;
 
+[CommandHandler(typeof(RemoteAdminCommandHandler))]
 public class SetZone : ICommand
 {
     public bool Execute(ArraySegment<string> arguments, ICommandSender sender, [UnscopedRef] out string response)

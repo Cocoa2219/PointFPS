@@ -132,18 +132,12 @@ public class EventHandler(PointFPS plugin)
 
     public void OnMapGenerated()
     {
-        ZoneType = Random.Range(0, 3) switch
-        {
-            0 => ZoneType.LightContainment,
-            1 => ZoneType.HeavyContainment,
-            2 => ZoneType.Entrance,
-            _ => ZoneType
-        };
+        ZoneType = ZoneType.HeavyContainment;
     }
 
     private Room PickRandomRoom(ZoneType type)
     {
-        var rooms = Room.List.Where(x => x.Zone == type && _takeoverPointSpawns[type].ToList().Contains(x.Type))
+        var rooms = Room.List.Where(x => x.Zone == type && _takeoverPointSpawns[type].ToList().Contains(x.Type) && x != room)
             .ToList();
 
         var _room = rooms[Random.Range(0, rooms.Count)];
@@ -412,17 +406,36 @@ public class EventHandler(PointFPS plugin)
 
             switch (_timer)
             {
+                case 300:
+                    room.ResetColor();
+                    room = PickRandomRoom(ZoneType);
+                    room.Color = new Color32(132, 191, 133, 25);
+                    break;
+                case 240:
+                    room.ResetColor();
+                    room = PickRandomRoom(ZoneType);
+                    room.Color = new Color32(132, 191, 133, 25);
+                    break;
                 case 180:
                     Player.List.ToList().ForEach(x => x.SyncEffect(new Effect(EffectType.Scp1853, 0)));
                     _1853EffectCount = 1;
+                    room.ResetColor();
+                    room = PickRandomRoom(ZoneType);
+                    room.Color = new Color32(132, 191, 133, 25);
                     break;
                 case 120:
                     Player.List.ToList().ForEach(x => x.SyncEffect(new Effect(EffectType.Scp1853, 0, 2)));
                     _1853EffectCount = 2;
+                    room.ResetColor();
+                    room = PickRandomRoom(ZoneType);
+                    room.Color = new Color32(132, 191, 133, 25);
                     break;
                 case 60:
                     Player.List.ToList().ForEach(x => x.SyncEffect(new Effect(EffectType.Scp1853, 0, 3)));
                     _1853EffectCount = 3;
+                    room.ResetColor();
+                    room = PickRandomRoom(ZoneType);
+                    room.Color = new Color32(132, 191, 133, 25);
                     break;
             }
 
@@ -448,10 +461,10 @@ public class EventHandler(PointFPS plugin)
 
         yield return Timing.WaitForSeconds(3f);
 
-        if (_teamAPoint > _teamBPoint)
+        if (_teamAPoint + _teamAZonePoint > _teamBPoint + _teamBZonePoint)
             Map.Broadcast(10, "<size=35><b>Class-D 팀이 승리했습니다!\n<size=15>와아아아ㅏㅏㅏ</size></b></size>",
                 Broadcast.BroadcastFlags.Normal, true);
-        else if (_teamAPoint < _teamBPoint)
+        else if (_teamAPoint + _teamAZonePoint < _teamBPoint + _teamBZonePoint)
             Map.Broadcast(10, "<size=35><b>Nine-Tailed-Fox 팀이 승리했습니다!\n<size=15>와아아아ㅏㅏㅏ</size></b></size>",
                 Broadcast.BroadcastFlags.Normal, true);
         else
@@ -658,6 +671,15 @@ public class EventHandler(PointFPS plugin)
     {
         var mult = Mathf.Pow(10.0f, digits);
         return Mathf.Round(value * mult) / mult;
+    }
+
+    public string PercentageToHex(double percentage)
+    {
+        int value = (int)(percentage * 255);
+
+        string hexValue = value.ToString("X2");
+
+        return hexValue;
     }
 
     private string FormatCompass(float degree, Player player)
@@ -871,7 +893,7 @@ public class EventHandler(PointFPS plugin)
             _ => "#FFFFFF"
         };
 
-        switch (_teamAPoint - _teamBPoint)
+        switch ((_teamAPoint + _teamAZonePoint) - (_teamBPoint + _teamBZonePoint))
         {
             case < 0:
                 txt.Append(
@@ -1378,7 +1400,7 @@ public class EventHandler(PointFPS plugin)
         ev.Attacker.AddAmmo(AmmoType.Nato9, 120);
         ev.Attacker.SetAmmo(AmmoType.Ammo12Gauge, 54);
 
-        ev.Attacker.AddAhp(10, 75, 0, 1);
+        ev.Attacker.AddAhp(5, 75, 0, 1);
         _coroutines.Add(Timing.RunCoroutine(Respawn(ev.Player, 5)));
     }
 
